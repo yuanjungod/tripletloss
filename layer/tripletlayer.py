@@ -69,17 +69,17 @@ class TripletLayer(caffe.Layer):
 
         for i in range((bottom[0]).num/3):
             if not i in self.no_residual_list:
-                x_a = bottom[0].data[i]
-                x_p = bottom[0].data[i+1]
-                x_n = bottom[0].data[i+2]
-                bottom[0].diff[i] =  ((x_n - x_p)/((bottom[0]).num/3))
-                bottom[0].diff[i+1] =  ((x_p - x_a)/((bottom[0]).num/3))
-                bottom[0].diff[i+2] =  ((x_a - x_n)/((bottom[0]).num/3))
-            
+                x_a = bottom[0].data[i*3]
+				x_p = bottom[0].data[i*3+1]
+				x_n = bottom[0].data[i*3+2]
+				#print x_a,x_p,x_n
+				bottom[0].diff[i*3] =  ((x_n - x_p)/((bottom[0]).num/3))
+				bottom[0].diff[i*3+1] =  ((x_p - x_a)/((bottom[0]).num/3))
+				bottom[0].diff[i*3+2] =  ((x_a - x_n)/((bottom[0]).num/3))
             else:
-                bottom[0].diff[i] = 0
-                bottom[0].diff[i+1] = 0
-                bottom[0].diff[i+2] = 0
+                bottom[0].diff[i*3] = 0
+                bottom[0].diff[i*3+1] = 0
+                bottom[0].diff[i*3+2] = 0
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""
