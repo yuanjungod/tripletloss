@@ -69,7 +69,7 @@ class TripletLayer(caffe.Layer):
 
         for i in range((bottom[0]).num/3):
             if not i in self.no_residual_list:
-                x_a = bottom[0].data[i*3]
+				x_a = bottom[0].data[i*3]
 				x_p = bottom[0].data[i*3+1]
 				x_n = bottom[0].data[i*3+2]
 				#print x_a,x_p,x_n
