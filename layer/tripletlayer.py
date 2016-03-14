@@ -72,9 +72,9 @@ class TripletLayer(caffe.Layer):
                 x_a = bottom[0].data[i]
                 x_p = bottom[0].data[i+1]
                 x_n = bottom[0].data[i+2]
-                bottom[0].diff[i] =  (2*(x_n - x_p)/((bottom[0]).num/3))
-                bottom[0].diff[i+1] =  (2*(x_p - x_a)/((bottom[0]).num/3))
-                bottom[0].diff[i+2] =  (2*(x_a - x_n)/((bottom[0]).num/3))
+                bottom[0].diff[i] =  ((x_n - x_p)/((bottom[0]).num/3))
+                bottom[0].diff[i+1] =  ((x_p - x_a)/((bottom[0]).num/3))
+                bottom[0].diff[i+2] =  ((x_a - x_n)/((bottom[0]).num/3))
             
             else:
                 bottom[0].diff[i] = 0
