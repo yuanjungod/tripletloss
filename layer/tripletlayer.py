@@ -36,20 +36,20 @@ class TripletLayer(caffe.Layer):
         negative_minibatch_db = []
         for i in range((bottom[0]).num):
             if i%3 == 0 :
-                X_normalized = bottom[0].data[i].reshape(1,-1)[0]        
+                X_normalized = bottom[0].data[i]        
                 anchor_minibatch_db.append(X_normalized)
             elif i%3 == 1 :
-                X_normalized = bottom[0].data[i].reshape(1,-1)[0]        
+                X_normalized = bottom[0].data[i]        
                 positive_minibatch_db.append(X_normalized)
             elif i%3 == 2 :
-                X_normalized = bottom[0].data[i].reshape(1,-1)[0]        
+                X_normalized = bottom[0].data[i]        
                 negative_minibatch_db.append(X_normalized)
         loss = 0.0
         self.no_residual_list = []
         for i in range(((bottom[0]).num)/3):
-            a = np.array(anchor_minibatch_db[i]).reshape(1,-1)[0]
-            p = np.array(positive_minibatch_db[i]).reshape(1,-1)[0]
-            n = np.array(negative_minibatch_db[i]).reshape(1,-1)[0]
+            a = np.array(anchor_minibatch_db[i])
+            p = np.array(positive_minibatch_db[i])
+            n = np.array(negative_minibatch_db[i])
             a_p = a - p
             a_n = a - n
             ap = np.dot(a_p,a_p)
@@ -59,13 +59,14 @@ class TripletLayer(caffe.Layer):
             #print ('loss:'+str(_loss)+' '+'ap:'+str(ap)+' '+'an:'+str(an))
             if _loss == 0 :
                 self.no_residual_list.append(i)
-            loss += _loss
+                loss += _loss
         
-        loss = (loss/(((bottom[0]).num)/3)/2.0)
+        loss = (loss/(((bottom[0]).num)/3))
         top[0].data[...] = loss
     
 
     def backward(self, top, propagate_down, bottom):
+
 	if propagate_down[0]:
 	    for i in range((bottom[0]).num/3):
 		if not i in self.no_residual_list:
@@ -73,13 +74,13 @@ class TripletLayer(caffe.Layer):
 		    x_p = bottom[0].data[i*3+1]
 		    x_n = bottom[0].data[i*3+2]
 		    #print x_a,x_p,x_n
-		    bottom[0].diff[i*3] =  ((x_n - x_p)/((bottom[0]).num/3))
-		    bottom[0].diff[i*3+1] =  ((x_p - x_a)/((bottom[0]).num/3))
-		    bottom[0].diff[i*3+2] =  ((x_a - x_n)/((bottom[0]).num/3))
+		    bottom[0].diff[i*3] =  (2*(x_n - x_p)/((bottom[0]).num/3))
+		    bottom[0].diff[i*3+1] =  (2*(x_p - x_a)/((bottom[0]).num/3))
+		    bottom[0].diff[i*3+2] =  (2*(x_a - x_n)/((bottom[0]).num/3))
 		else:
-		    bottom[0].diff[i*3] = np.zeros(shape(bottom[0].data)[1]).reshape(shape(bottom[0].data)[1],1,1)
-		    bottom[0].diff[i*3+1] = np.zeros(shape(bottom[0].data)[1]).reshape(shape(bottom[0].data)[1],1,1)
-		    bttom[0].diff[i*3+2] = np.zeros(shape(bottom[0].data)[1]).reshape(shape(bottom[0].data)[1],1,1)
+		    bottom[0].diff[i*3] = np.zeros(shape(bottom[0].data)[1])
+		    bottom[0].diff[i*3+1] = np.zeros(shape(bottom[0].data)[1])
+		    bttom[0].diff[i*3+2] = np.zeros(shape(bottom[0].data)[1])
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""
