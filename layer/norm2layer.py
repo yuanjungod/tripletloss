@@ -22,7 +22,7 @@ class Norm2Layer(caffe.Layer):
     def setup(self, bottom, top):
         """Setup the TripletDataLayer."""
         assert bottom[0].num % 3 == 0
-        top[0].reshape(30, 2622, 1, 1)
+        top[0].reshape(bottom[0].num, shape(bottom[0].data)[1])
 
     def forward(self, bottom, top):
         """Get blobs and copy them into this layer's top blob vector."""
@@ -30,11 +30,8 @@ class Norm2Layer(caffe.Layer):
     	
     	for i in range((bottom[0]).num):
     	    X_normalized = preprocessing.normalize(bottom[0].data[i].reshape(1,-1), norm='l2')[0]
-    	    newlist = []
-    	    for j in range(shape(X_normalized)[0]):
-    		newlist.append([[X_normalized[j]]])
-    	    minibatch_db.append(newlist)		
-            top[0].data[...] = minibatch_db
+    	    minibatch_db.append(X_normalized)		
+        top[0].data[...] = minibatch_db
 
     def backward(self, top, propagate_down, bottom):
         """This layer does not propagate gradients."""
