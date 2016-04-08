@@ -80,7 +80,7 @@ class TripletLayer(caffe.Layer):
 		else:
 		    bottom[0].diff[i*3] = np.zeros(shape(bottom[0].data)[1])
 		    bottom[0].diff[i*3+1] = np.zeros(shape(bottom[0].data)[1])
-		    bttom[0].diff[i*3+2] = np.zeros(shape(bottom[0].data)[1])
+		    bottom[0].diff[i*3+2] = np.zeros(shape(bottom[0].data)[1])
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""
