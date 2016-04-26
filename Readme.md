@@ -11,3 +11,5 @@ I provide an online triplet sample selection usage.
 ### Setup
 
 Rebuild your caffe directory and makesure your python could find the added layers.
+
+@ if this is useful for you, please star, thanks~ :P
