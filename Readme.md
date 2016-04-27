@@ -6,7 +6,7 @@ This is just an example which shows how to use the method to train a model.
 
 ## Online sample selection
 
-I provide an online triplet sample selection usage. 
+I provide an online triplet sample selection usage. Just a runnable strategy. YOU MAY CHANGE IT to fit your own strategy.
 
 ### Setup
 
