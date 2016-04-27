@@ -27,35 +27,35 @@ class DataLayer(caffe.Layer):
     def _get_next_minibatch(self):
         num_images = self._batch_size
         # Sample to use for each image in this batch
-		sample = []
-		if self._index >= len(self.data_container._sample)
-			self._index = 0
-		archor = self.data_container._sample[self._index]
-		archor_personname = archor.split('@')[0]
-		self._index = self._index + 1
-		sample.append(archor)
-		# Sample positive samples
-		for i in range( config.POSITIVE_NUM - 1 ):    
-			picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
-			sample.append(self.data_container._sample_person[archor_personname][picindex])
-		# Sample negative samples
-		for i in range(self._batch_size - config.POSITIVE_NUM):	    
-			rand = random.randint(0,len(self.data_container._sample_person)-1)
-			personname = self.data_container._sample_person.keys()[rand]
-			if archor_personname == personname :
-				index = max(0,rand - 1)
-				if index == 0 :
-					index = rand + 1
-				else:
-					index = rand - 1
-				personname = self.data_container._sample_person.keys()[rand]
-			picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
-			sample.append(self.data_container._sample_person[personname][picindex])
-		im_blob,labels_blob = self._get_image_blob(sample)
-	   
-		blobs = {'data': im_blob,
-			 'labels': labels_blob}
-		return blobs
+	sample = []
+	if self._index >= len(self.data_container._sample)
+	    self._index = 0
+	archor = self.data_container._sample[self._index]
+	archor_personname = archor.split('@')[0]
+	self._index = self._index + 1
+	sample.append(archor)
+	# Sample positive samples
+	for i in range( config.POSITIVE_NUM - 1 ):    
+	    picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
+	    sample.append(self.data_container._sample_person[archor_personname][picindex])
+	# Sample negative samples
+	for i in range(self._batch_size - config.POSITIVE_NUM):	    
+	    rand = random.randint(0,len(self.data_container._sample_person)-1)
+	    personname = self.data_container._sample_person.keys()[rand]
+	    if archor_personname == personname :
+	    	index = max(0,rand - 1)
+	    	if index == 0 :
+	            index = rand + 1
+		else:
+		    index = rand - 1
+		personname = self.data_container._sample_person.keys()[rand]
+	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
+	    sample.append(self.data_container._sample_person[personname][picindex])
+	im_blob,labels_blob = self._get_image_blob(sample)
+   
+	blobs = {'data': im_blob,
+		 'labels': labels_blob}
+	return blobs
 		
     def _get_image_blob(self,sample):
        	im_blob = []
@@ -63,8 +63,8 @@ class DataLayer(caffe.Layer):
         for i in range(self._batch_size):
             im = cv2.imread(config.IMAGEPATH+sample[i])
             personname = sample[i].split('@')[0]
-			#print str(i)+':'+personname+','+str(len(sample))
-			labels_blob.append(self.data_container._sample_label[personname])
+	    #print str(i)+':'+personname+','+str(len(sample))
+	    labels_blob.append(self.data_container._sample_label[personname])
             im = prep_im_for_blob(im)
             
             im_blob.append(im)
@@ -123,33 +123,35 @@ class TestBlobFetcher():
     def _get_next_minibatch(self):
         num_images = self._batch_size
         # Sample to use for each image in this batch
-		sample = []
-		archor = self.data_container._sample[self._index]
-		archor_personname = archor.split('@')[0]
-		self._index = self._index + 1
-		sample.append(archor)
-		# Sample positive samples
-		for i in range( config.POSITIVE_NUM - 1 ):    
-			picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
-			sample.append(self.data_container._sample_person[archor_personname][picindex])
-		# Sample negative samples
-		for i in range(self._batch_size - config.POSITIVE_NUM):	    
-			rand = random.randint(0,len(self.data_container._sample_person)-1)
-			personname = self.data_container._sample_person.keys()[rand]
-			if archor_personname == personname :
-				index = max(0,rand - 1)
-				if index == 0 :
-					index = rand + 1
-				else:
-					index = rand - 1
-				personname = self.data_container._sample_person.keys()[rand]
-			picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
-			sample.append(self.data_container._sample_person[personname][picindex])
-		im_blob,labels_blob = self._get_image_blob(sample)
-	   
-		blobs = {'data': im_blob,
-			 'labels': labels_blob}
-		return blobs
+	sample = []
+	if self._index >= len(self.data_container._sample)
+	    self._index = 0
+	archor = self.data_container._sample[self._index]
+	archor_personname = archor.split('@')[0]
+	self._index = self._index + 1
+	sample.append(archor)
+	# Sample positive samples
+	for i in range( config.POSITIVE_NUM - 1 ):    
+	    picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
+	    sample.append(self.data_container._sample_person[archor_personname][picindex])
+	# Sample negative samples
+	for i in range(self._batch_size - config.POSITIVE_NUM):	    
+	    rand = random.randint(0,len(self.data_container._sample_person)-1)
+	    personname = self.data_container._sample_person.keys()[rand]
+	    if archor_personname == personname :
+	    	index = max(0,rand - 1)
+	    	if index == 0 :
+	            index = rand + 1
+		else:
+		    index = rand - 1
+		personname = self.data_container._sample_person.keys()[rand]
+	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
+	    sample.append(self.data_container._sample_person[personname][picindex])
+	im_blob,labels_blob = self._get_image_blob(sample)
+   
+	blobs = {'data': im_blob,
+		 'labels': labels_blob}
+	return blobs
 		
     def _get_image_blob(self,sample):
        	im_blob = []
@@ -157,8 +159,8 @@ class TestBlobFetcher():
         for i in range(self._batch_size):
             im = cv2.imread(config.IMAGEPATH+sample[i])
             personname = sample[i].split('@')[0]
-			#print str(i)+':'+personname+','+str(len(sample))
-			labels_blob.append(self.data_container._sample_label[personname])
+	    #print str(i)+':'+personname+','+str(len(sample))
+	    labels_blob.append(self.data_container._sample_label[personname])
             im = prep_im_for_blob(im)
             
             im_blob.append(im)
