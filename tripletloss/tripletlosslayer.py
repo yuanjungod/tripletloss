@@ -5,8 +5,6 @@
 # --------------------------------------------------------
 
 """The data layer used during training a VGG_FACE network by triplet loss.
-
-   attention: DO NOT shuffle your input batch. 
 """
 import caffe
 import numpy as np
@@ -24,7 +22,7 @@ class TripletLayer(caffe.Layer):
         """Setup the TripletDataLayer."""
         
         assert shape(bottom[0].data) == shape(bottom[1].data)
-		assert shape(bottom[0].data) == shape(bottom[2].data)
+	assert shape(bottom[0].data) == shape(bottom[2].data)
 		
         layer_params = yaml.load(self.param_str_)
         self.margin = layer_params['margin']
@@ -38,11 +36,11 @@ class TripletLayer(caffe.Layer):
         negative_minibatch_db = []
         for i in range((bottom[0]).num):
 		        
-			anchor_minibatch_db.append(bottom[0].data[i])
+	    anchor_minibatch_db.append(bottom[0].data[i])
 		        
-			positive_minibatch_db.append(bottom[1].data[i])
+	    positive_minibatch_db.append(bottom[1].data[i])
 		        
-			negative_minibatch_db.append(bottom[2].data[i])
+	    negative_minibatch_db.append(bottom[2].data[i])
 			
         loss = 0.0
         self.no_residual_list = []
@@ -67,20 +65,20 @@ class TripletLayer(caffe.Layer):
 
     def backward(self, top, propagate_down, bottom):
 
-		if propagate_down[0]:
-			for i in range((bottom[0]).num):
-				if not i in self.no_residual_list:
-					x_a = bottom[0].data[i]
-					x_p = bottom[1].data[i]
-					x_n = bottom[2].data[i]
-					#print x_a,x_p,x_n
-					bottom[0].diff[i] =  (2*(x_n - x_p)/((bottom[0]).num))
-					bottom[1].diff[i] =  (2*(x_p - x_a)/((bottom[0]).num))
-					bottom[2].diff[i] =  (2*(x_a - x_n)/((bottom[0]).num))
-				else:
-					bottom[0].diff[i] = np.zeros(shape(bottom[0].data)[1])
-					bottom[1].diff[i] = np.zeros(shape(bottom[0].data)[1])
-					bottom[2].diff[i] = np.zeros(shape(bottom[0].data)[1])
+	if propagate_down[0]:
+	    for i in range((bottom[0]).num):
+	        if not i in self.no_residual_list:
+		    x_a = bottom[0].data[i]
+		    x_p = bottom[1].data[i]
+		    x_n = bottom[2].data[i]
+		    #print x_a,x_p,x_n
+		    bottom[0].diff[i] =  (2*(x_n - x_p)/((bottom[0]).num))
+		    bottom[1].diff[i] =  (2*(x_p - x_a)/((bottom[0]).num))
+		    bottom[2].diff[i] =  (2*(x_a - x_n)/((bottom[0]).num))
+		else:
+		    bottom[0].diff[i] = np.zeros(shape(bottom[0].data)[1])
+		    bottom[1].diff[i] = np.zeros(shape(bottom[0].data)[1])
+		    bottom[2].diff[i] = np.zeros(shape(bottom[0].data)[1])
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""
