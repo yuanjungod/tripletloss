@@ -28,6 +28,8 @@ class DataLayer(caffe.Layer):
         num_images = self._batch_size
         # Sample to use for each image in this batch
 		sample = []
+		if self._index >= len(self.data_container._sample)
+			self._index = 0
 		archor = self.data_container._sample[self._index]
 		archor_personname = archor.split('@')[0]
 		self._index = self._index + 1
