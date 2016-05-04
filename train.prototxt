@@ -556,7 +556,7 @@ layer {
   bottom: "fc9"
   top: "norm2"
   python_param {
-    module: "tripletloss.tripletlayer"
+    module: "tripletloss.norm2Layer"
     layer: "Norm2Layer"
   }
 }
