@@ -14,19 +14,19 @@ Rebuild your caffe directory and makesure your python could find the added layer
 
 Go to your caffe root path:
 	
-	'''cp Makefile.configexample Makefile.config'''
+	'cp Makefile.configexample Makefile.config'
 	
 Open Makefile.config uncommit the line :
 
-	'''WITH_PYTHON_LAYER := 1'''
+	'WITH_PYTHON_LAYER := 1'
 	
 Then return to caffe root create build directory:
 
-	'''mkdir build
+	'mkdir build
 	cd build
 	cmake ..
 	make all & make pycaffe
-    '''
+    '
 
 ### Usage
 
