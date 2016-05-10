@@ -35,22 +35,24 @@ class DataLayer(caffe.Layer):
 	self._index = self._index + 1
 	sample.append(archor)
 	# Sample positive samples
-	for i in range( config.POSITIVE_NUM - 1 ):    
+	while len(sample) < config.POSITIVE_NUM:    
 	    picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
-	    sample.append(self.data_container._sample_person[archor_personname][picindex])
+	    if (self.data_container._sample_person[archor_personname][picindex]) not in sample:
+	    	sample.append(self.data_container._sample_person[archor_personname][picindex])
 	# Sample negative samples
-	for i in range(self._batch_size - config.POSITIVE_NUM):	    
+	while len(sample) < self._batch_size:	    
 	    rand = random.randint(0,len(self.data_container._sample_person)-1)
 	    personname = self.data_container._sample_person.keys()[rand]
 	    if archor_personname == personname :
-	    	index = max(0,rand - 1)
-	    	if index == 0 :
-	            index = rand + 1
+		index = max(0,rand - 1)
+		if index == 0 :
+		    index = 1
 		else:
 		    index = rand - 1
-		personname = self.data_container._sample_person.keys()[rand]
-	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
-	    sample.append(self.data_container._sample_person[personname][picindex])
+	        personname = self.data_container._sample_person.keys()[rand]
+       	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
+	    if (self.data_container._sample_person[personname][picindex]) not in sample:
+	        sample.append(self.data_container._sample_person[personname][picindex])
 	im_blob,labels_blob = self._get_image_blob(sample)
    
 	blobs = {'data': im_blob,
@@ -131,22 +133,24 @@ class TestBlobFetcher():
 	self._index = self._index + 1
 	sample.append(archor)
 	# Sample positive samples
-	for i in range( config.POSITIVE_NUM - 1 ):    
+	while len(sample) < config.POSITIVE_NUM:    
 	    picindex = random.randint(0,len(self.data_container._sample_person[archor_personname])-1)
-	    sample.append(self.data_container._sample_person[archor_personname][picindex])
+	    if (self.data_container._sample_person[archor_personname][picindex]) not in sample:
+	    	sample.append(self.data_container._sample_person[archor_personname][picindex])
 	# Sample negative samples
-	for i in range(self._batch_size - config.POSITIVE_NUM):	    
+	while len(sample) < self._batch_size:	    
 	    rand = random.randint(0,len(self.data_container._sample_person)-1)
 	    personname = self.data_container._sample_person.keys()[rand]
 	    if archor_personname == personname :
-	    	index = max(0,rand - 1)
-	    	if index == 0 :
-	            index = rand + 1
+		index = max(0,rand - 1)
+		if index == 0 :
+		    index = 1
 		else:
 		    index = rand - 1
-		personname = self.data_container._sample_person.keys()[rand]
-	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
-	    sample.append(self.data_container._sample_person[personname][picindex])
+	        personname = self.data_container._sample_person.keys()[rand]
+       	    picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
+	    if (self.data_container._sample_person[personname][picindex]) not in sample:
+	        sample.append(self.data_container._sample_person[personname][picindex])
 	im_blob,labels_blob = self._get_image_blob(sample)
    
 	blobs = {'data': im_blob,
