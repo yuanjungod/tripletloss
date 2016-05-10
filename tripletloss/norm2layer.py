@@ -27,11 +27,11 @@ class Norm2Layer(caffe.Layer):
 
     def forward(self, bottom, top):
         """Get blobs and copy them into this layer's top blob vector."""
-    	minibatch_db = []
-    	
-    	for i in range((bottom[0]).num):
-    	    X_normalized = preprocessing.normalize(bottom[0].data[i].reshape(1,-1), norm='l2')[0]
-    	    minibatch_db.append(X_normalized)		
+        minibatch_db = []
+        
+        for i in range((bottom[0]).num):
+            X_normalized = preprocessing.normalize(bottom[0].data[i].reshape(1,-1), norm='l2')[0]
+            minibatch_db.append(X_normalized)		
         top[0].data[...] = minibatch_db
 
     def backward(self, top, propagate_down, bottom):

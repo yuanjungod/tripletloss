@@ -24,18 +24,18 @@ class SolverWrapper(object):
                  pretrained_model=None):
         """Initialize the SolverWrapper."""
         self.output_dir = output_dir
-	
-	caffe.set_mode_gpu()
-	caffe.set_device(0)
-	self.solver = caffe.SGDSolver(solver_prototxt)
-	if pretrained_model is not None:
-	    print ('Loading pretrained model '
-			   'weights from {:s}').format(pretrained_model)
-	    self.solver.net.copy_from(pretrained_model)
 
-	self.solver_param = caffe_pb2.SolverParameter()
-	with open(solver_prototxt, 'rt') as f:
-		pb2.text_format.Merge(f.read(), self.solver_param)
+        caffe.set_mode_gpu()
+        caffe.set_device(0)
+        self.solver = caffe.SGDSolver(solver_prototxt)
+        if pretrained_model is not None:
+            print ('Loading pretrained model '
+                   'weights from {:s}').format(pretrained_model)
+            self.solver.net.copy_from(pretrained_model)
+
+        self.solver_param = caffe_pb2.SolverParameter()
+        with open(solver_prototxt, 'rt') as f:
+            pb2.text_format.Merge(f.read(), self.solver_param)
 
 
     def snapshot(self):
@@ -60,7 +60,7 @@ class SolverWrapper(object):
         timer = Timer()
         while self.solver.iter < max_iters:
             timer.tic()
-	    self.solver.step(1)
+            self.solver.step(1)
             timer.toc()
             if self.solver.iter % (10 * self.solver_param.display) == 0:
                 print 'speed: {:.3f}s / iter'.format(timer.average_time)
