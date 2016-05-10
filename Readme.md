@@ -33,10 +33,10 @@ Change the configs in ./tripletloss/config.py, Makesure your image path is exist
 
 	python train.py
 
-I provide a pretrained example model training form a data set of 997 indentities. If you could change the top fc9 layer's name and finetune this model.
-But the best way is to make the model to fit your own dataset smoothly,
+I provide a pretrained example model training from a data set of 997 indentities. You could change the top fc9 layer's name and finetune this model.
+But the best way is to make the model to fit your own dataset smoothly. Re-training the model on your own data set.
 
-My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/1506.07310.pdf). (also same as the vgg_face's method)
+My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/1506.07310.pdf). (also similiar with the vgg_face's method)
 
 Firstly, pretraining the model with softmax, or you'll get a real long period waiting for your model to converge.
 Then use triplelet method to finetune your model makeing your model's output feature to fit the expected Euclidean distance.
