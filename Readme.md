@@ -42,3 +42,5 @@ Firstly, pretraining the model with softmax, or you'll get a real long period wa
 Then use triplelet method to finetune your model makeing your model's output feature to fit the expected Euclidean distance.
 
 notation: maybe your need a really well cropped face dataset to do this
+
+If the proposal is helpful for you, please star it. thanks~
