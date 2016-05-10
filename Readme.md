@@ -31,6 +31,8 @@ Then return to caffe root create build directory:
 
 Change the configs in ./tripletloss/config.py, Makesure your image path exists, (my path is exampled)
 
+	python train.py
+
 I provide a pretrained example model training form a data set of 997 indentities. If you could change the top fc9 layer's name and finetune this model.
 But the best way is to make the model to fit your own dataset smoothly,
 
