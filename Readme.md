@@ -29,7 +29,7 @@ Then return to caffe root create build directory:
     
 ## Usage
 
-Change the configs in ./tripletloss/config.py, Makesure your image path exists, (my path is exampled)
+Change the configs in ./tripletloss/config.py, Makesure your image path is exists, (my path is exampled)
 
 	python train.py
 
@@ -41,6 +41,6 @@ My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/
 Firstly, pretraining the model with softmax, or you'll get a real long period waiting for your model to converge.
 Then use triplelet method to finetune your model makeing your model's output feature to fit the expected Euclidean distance.
 
-notation: maybe your need a really well cropped face dataset to do this
+notation: maybe your need a really well cropped face dataset to do this.
 
 If the proposal is helpful for you, please star it. thanks~
