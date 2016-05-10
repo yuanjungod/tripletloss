@@ -39,7 +39,7 @@ But the best way is to make the model to fit your own dataset smoothly. Re-train
 My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/1506.07310.pdf). (also similiar with the vgg_face's method)
 
 Firstly, pretraining the model with softmax, or you'll get a real long period waiting for your model to converge.
-Then use triplelet method to finetune your model makeing your model's output feature to fit the expected Euclidean distance.
+Then use triplet method to finetune your model, makeing your model's output feature fits the expected Euclidean distance.
 
 notation: maybe your need a really well cropped face dataset to do this.
 
