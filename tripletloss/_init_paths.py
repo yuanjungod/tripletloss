@@ -4,7 +4,7 @@
 # Written by David Lu
 # --------------------------------------------------------
 
-"""Set up paths for Fast R-CNN."""
+"""Set up paths for Tripletloss"""
 
 import os.path as osp
 import sys
