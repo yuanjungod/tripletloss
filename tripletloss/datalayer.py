@@ -46,10 +46,10 @@ class DataLayer(caffe.Layer):
             if archor_personname == personname :
                 index = max(0,rand - 1)
                 if index == 0 :
-                    index = 1
+                    index = rand + 1
                 else:
                     index = rand - 1
-                personname = self.data_container._sample_person.keys()[rand]
+                personname = self.data_container._sample_person.keys()[index]
             picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
             if (self.data_container._sample_person[personname][picindex]) not in sample:
                 sample.append(self.data_container._sample_person[personname][picindex])
@@ -143,10 +143,10 @@ class TestBlobFetcher():
             if archor_personname == personname :
                 index = max(0,rand - 1)
                 if index == 0 :
-                    index = 1
+                    index = rand + 1
                 else:
                     index = rand - 1
-                personname = self.data_container._sample_person.keys()[rand]
+                personname = self.data_container._sample_person.keys()[index]
             picindex = random.randint(0,len(self.data_container._sample_person[personname])-1)
             if (self.data_container._sample_person[personname][picindex]) not in sample:
                 sample.append(self.data_container._sample_person[personname][picindex])
