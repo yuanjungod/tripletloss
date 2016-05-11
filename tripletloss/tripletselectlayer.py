@@ -73,7 +73,6 @@ class TripletSelectLayer(caffe.Layer):
                     top_archor.append(archor_feature)
                     top_positive.append(positive_feature)
                     top_negative.append(negative_feature)
-                    top_weights.append([1])
                     if len(top_archor) == 1:
                         print ('loss:'+'ap:'+str(ap)+' '+'an:'+str(an))
                     tripletlist.append(pair)
