@@ -1,5 +1,5 @@
 
-Please download the pre-trained model from [here](http://pan.baidu.com/s/1qY5UVxi).
+Please download the pre-trained model from [here](http://pan.baidu.com/s/1mhSNB4G).
 
 Finetune this model with tripletloss,or re-train the model on your own dataset.
 
@@ -8,3 +8,4 @@ I set an unreasonable initial value to bias in fc9. So the output feature is bia
 If you want to use it, the output feature should be fitted by PCA.
 
 I'll provide a new model recently......
+
