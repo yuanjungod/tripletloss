@@ -1,4 +1,4 @@
-# TripletLoss Layer Example
+# TripletLoss Example
 
 This aims to reproduce the loss function used in Google's [FaceNet paper](http://arxiv.org/abs/1503.03832v1).
 
