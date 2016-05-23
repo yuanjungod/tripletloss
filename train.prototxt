@@ -7,7 +7,6 @@ layer {
   python_param {
     module: 'datalayer'
     layer: 'DataLayer'
-    param_str: "'batch_size': 30"
   }
 }
 
@@ -29,8 +28,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -58,8 +56,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -98,8 +95,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -127,8 +123,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -155,11 +150,11 @@ layer {
   bottom: "pool2"
   top: "conv3_1"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -167,8 +162,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -184,11 +178,11 @@ layer {
   bottom: "conv3_1"
   top: "conv3_2"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -196,8 +190,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -213,11 +206,11 @@ layer {
   bottom: "conv3_2"
   top: "conv3_3"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -225,8 +218,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -253,11 +245,11 @@ layer {
   bottom: "pool3"
   top: "conv4_1"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -265,8 +257,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -282,11 +273,11 @@ layer {
   bottom: "conv4_1"
   top: "conv4_2"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -294,8 +285,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -311,11 +301,11 @@ layer {
   bottom: "conv4_2"
   top: "conv4_3"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -323,8 +313,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -351,11 +340,11 @@ layer {
   bottom: "pool4"
   top: "conv5_1"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -363,8 +352,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -380,11 +368,11 @@ layer {
   bottom: "conv5_1"
   top: "conv5_2"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -392,8 +380,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -409,11 +396,11 @@ layer {
   bottom: "conv5_2"
   top: "conv5_3"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   convolution_param {
@@ -421,8 +408,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type:"xavier"
     }
   }
 }
@@ -449,18 +435,17 @@ layer {
   bottom: "pool5"
   top: "fc6"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   inner_product_param {
     num_output: 4096
     weight_filler {
-      type: "gaussian"
-      std: 0.005
+      type:"xavier"
     }
   }
 }
@@ -485,18 +470,17 @@ layer {
   bottom: "fc6"
   top: "fc7"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   inner_product_param {
     num_output: 4096
     weight_filler {
-      type: "gaussian"
-      std: 0.005
+      type:"xavier"
     }
   }
 }
@@ -521,34 +505,18 @@ layer {
   bottom: "fc7"
   top: "fc9"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0
+    decay_mult: 0
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
   }
   inner_product_param {
     num_output: 997
     weight_filler {
-      type: "gaussian"
-      std: 0.01
+      type: "xavier"
     }
-  }
-}
-layer {
-  name: "relu8"
-  type: "ReLU"
-  bottom: "fc9"
-  top: "fc9"
-}
-layer {
-  name: "drop8"
-  type: "Dropout"
-  bottom: "fc9"
-  top: "fc9"
-  dropout_param {
-    dropout_ratio: 0.5
   }
 }
 
@@ -556,7 +524,7 @@ layer {
 #layer {
 #  name: "accuracy_1"
 #  type:  "Accuracy"
-#  bottom: "fc9"
+#  bottom: "norm2"
 #  bottom: "labels"
 #  top: "accuracy"
 #  include: { phase: TEST }
@@ -564,12 +532,11 @@ layer {
 #layer {
 #  name: "loss_cls"
 #  type: "SoftmaxWithLoss"
-#  bottom: "fc9"
+#  bottom: "norm2"
 #  bottom: "labels"
 #  top: "loss_cls"
 #  loss_weight: 1
 #}
-
 #====================tripletloss==================
 layer {
   name: "norm2"
@@ -582,9 +549,25 @@ layer {
   }
 }
 layer {
+  name: "fc9_1"
+  type: "InnerProduct"
+  bottom: "norm2"
+  top: "fc9_1"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 512
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
   name: "triplet_select"
   type: "Python"
-  bottom: "norm2"
+  bottom: "fc9_1"
   bottom: "labels"
   top: "archor"
   top: "positive"
@@ -592,7 +575,6 @@ layer {
   python_param {
     module: "tripletselectlayer"
     layer: "TripletSelectLayer"
-    param_str: "'triplet': 30"
   }
 }
 layer {

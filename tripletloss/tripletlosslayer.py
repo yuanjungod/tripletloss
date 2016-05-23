@@ -27,6 +27,7 @@ class TripletLayer(caffe.Layer):
         layer_params = yaml.load(self.param_str_)
         self.margin = layer_params['margin']
         
+        self.a = 1
         top[0].reshape(1)
 
     def forward(self, bottom, top):
@@ -35,14 +36,14 @@ class TripletLayer(caffe.Layer):
         positive_minibatch_db = []
         negative_minibatch_db = []
         for i in range((bottom[0]).num):
-        
+                
             anchor_minibatch_db.append(bottom[0].data[i])
        
             positive_minibatch_db.append(bottom[1].data[i]) 
         
             negative_minibatch_db.append(bottom[2].data[i])
 
-        loss = 0.0
+        loss = float(0)
         self.no_residual_list = []
         for i in range(((bottom[0]).num)):
             a = np.array(anchor_minibatch_db[i])
@@ -54,31 +55,38 @@ class TripletLayer(caffe.Layer):
             an = np.dot(a_n,a_n)
             dist = (self.margin + ap - an)
             _loss = max(dist,0.0)
-            #print ('loss:'+str(_loss)+' '+'ap:'+str(ap)+' '+'an:'+str(an))
+            if i == 0:
+                print ('loss:'+' ap:'+str(ap)+' '+'an:'+str(an))
             if _loss == 0 :
                 self.no_residual_list.append(i)
             loss += _loss
         
-        loss = (loss/((bottom[0]).num))
+        loss = (loss/(2*(bottom[0]).num))
         top[0].data[...] = loss
     
 
     def backward(self, top, propagate_down, bottom):
-
+        count = 0
         if propagate_down[0]:
             for i in range((bottom[0]).num):
                 if not i in self.no_residual_list:
                     x_a = bottom[0].data[i]
                     x_p = bottom[1].data[i]
                     x_n = bottom[2].data[i]
+                    
                     #print x_a,x_p,x_n
-                    bottom[0].diff[i] =  (2*(x_n - x_p)/((bottom[0]).num))
-                    bottom[1].diff[i] =  (2*(x_p - x_a)/((bottom[0]).num))
-                    bottom[2].diff[i] =  (2*(x_a - x_n)/((bottom[0]).num))
+                    bottom[0].diff[i] =  self.a*((x_n - x_p)/((bottom[0]).num))
+                    bottom[1].diff[i] =  self.a*((x_p - x_a)/((bottom[0]).num))
+                    bottom[2].diff[i] =  self.a*((x_a - x_n)/((bottom[0]).num))
+                    
+                    count += 1
                 else:
                     bottom[0].diff[i] = np.zeros(shape(bottom[0].data)[1])
                     bottom[1].diff[i] = np.zeros(shape(bottom[0].data)[1])
                     bottom[2].diff[i] = np.zeros(shape(bottom[0].data)[1])
+        
+        print 'select gradient_loss:',bottom[0].diff[0][0]
+        #print shape(bottom[0].diff),shape(bottom[1].diff),shape(bottom[2].diff)
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""

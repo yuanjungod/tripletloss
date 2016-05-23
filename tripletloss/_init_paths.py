@@ -4,7 +4,7 @@
 # Written by David Lu
 # --------------------------------------------------------
 
-"""Set up paths for Tripletloss"""
+"""Set up paths for tripletloss"""
 
 import os.path as osp
 import sys

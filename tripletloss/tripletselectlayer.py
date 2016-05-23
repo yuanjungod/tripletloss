@@ -20,12 +20,8 @@ import config
 class TripletSelectLayer(caffe.Layer):
         
     def setup(self, bottom, top):
-        """Setup the TripletDataLayer."""
-        
-        
-        layer_params = yaml.load(self.param_str_)
-        self.triplet = layer_params['triplet']
-        
+        """Setup the TripletSelectLayer."""
+        self.triplet = config.BATCH_SIZE/3
         top[0].reshape(self.triplet,shape(bottom[0].data)[1])
         top[1].reshape(self.triplet,shape(bottom[0].data)[1])
         top[2].reshape(self.triplet,shape(bottom[0].data)[1])
@@ -35,56 +31,55 @@ class TripletSelectLayer(caffe.Layer):
         top_archor = []
         top_positive = []
         top_negative = []
-        labels = []	
-        tripletlist = []
-        while len(top_archor) < (self.triplet):
-            a_index = random.randint(0,4)
-            p_index = random.randint(0,4)
-            n_index = random.randint(5,bottom[0].num-1)
-            if a_index == p_index :
-                p_index = max(0,a_index - 1)
-                if p_index == 0 :
-                    p_index = a_index + 1
-                else:
-                    p_index = a_index - 1
-            pair = [a_index,p_index,n_index]
-            if pair not in tripletlist:
-                #print '===========archor_feature==========='
-                archor_label = bottom[1].data[a_index]
-                archor_feature = bottom[0].data[a_index].reshape(1,-1)[0]
-                #print bottom[0].data[a_index]
-                #print '===========positive_feature==========='
-                #print positive_feature
-                positive_label = bottom[1].data[p_index]
-                positive_feature = bottom[0].data[p_index].reshape(1,-1)[0]
-                #print '===========negative_feature==========='
-                    #print negative_feature
-                negative_label = bottom[1].data[n_index]
-                negative_feature = bottom[0].data[n_index].reshape(1,-1)[0]
+        labels = []
+        self.tripletlist = []
+        self.no_residual_list=[]
+        aps = {}
+        ans = {}
 
-                a_p = archor_feature - positive_feature
-                a_n = archor_feature - negative_feature
-                #print a_p,a_n
-                #print negative_label
-                ap = np.dot(a_p,a_p)
-                an = np.dot(a_n,a_n)
-                
-                if an > ap:
-                    top_archor.append(archor_feature)
-                    top_positive.append(positive_feature)
-                    top_negative.append(negative_feature)
-                    if len(top_archor) == 1:
-                        print ('loss:'+'ap:'+str(ap)+' '+'an:'+str(an))
-                    tripletlist.append(pair)
-        
-        top[0].data[...] = np.array(top_archor).astype(float)
-        top[1].data[...] = np.array(top_positive).astype(float)
-        top[2].data[...] = np.array(top_negative).astype(float)
+        archor_feature = bottom[0].data[0]
+        for i in range(self.triplet):
+            positive_feature = bottom[0].data[i+self.triplet]
+            a_p = archor_feature - positive_feature
+            ap = np.dot(a_p,a_p)
+            aps[i+self.triplet] = ap
+        aps = sorted(aps.items(), key = lambda d: d[1], reverse = True)
+        for i in range(self.triplet):
+            negative_feature = bottom[0].data[i+self.triplet*2]
+            a_n = archor_feature - negative_feature
+            an = np.dot(a_n,a_n)
+            ans[i+self.triplet*2] = an
+        ans = sorted(ans.items(), key = lambda d: d[1], reverse = True)  
+
+        for i in range(self.triplet): 
+            top_archor.append(bottom[0].data[i])
+            top_positive.append(bottom[0].data[aps[i][0]])
+                top_negative.append(bottom[0].data[ans[i][0]])
+            if aps[i][1] >= ans[i][1]:
+            self.no_residual_list.append(i)
+            self.tripletlist.append([i,aps[i][0],ans[i][0]])
+
+        top[0].data[...] = np.array(top_archor).astype(float32)
+        top[1].data[...] = np.array(top_positive).astype(float32)
+        top[2].data[...] = np.array(top_negative).astype(float32)
     
 
     def backward(self, top, propagate_down, bottom):
-        """This layer does not propagate gradients."""
-        pass
+        
+        for i in range(len(self.tripletlist)):
+            if not i in self.no_residual_list:
+                bottom[0].diff[self.tripletlist[i][0]] = top[0].diff[i]
+                bottom[0].diff[self.tripletlist[i][1]] = top[1].diff[i]
+                bottom[0].diff[self.tripletlist[i][2]] = top[2].diff[i]
+            else:
+                bottom[0].diff[self.tripletlist[i][0]] = np.zeros(shape(top[0].diff[i]))
+                bottom[0].diff[self.tripletlist[i][1]] = np.zeros(shape(top[1].diff[i]))
+                bottom[0].diff[self.tripletlist[i][2]] = np.zeros(shape(top[2].diff[i]))
+
+        print 'backward-no_re:',bottom[0].diff[0][0]
+        print 'tripletlist:',self.no_residual_list
+
+        
 
     def reshape(self, bottom, top):
         """Reshaping happens during the call to forward."""

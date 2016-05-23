@@ -13,13 +13,13 @@ class sampledata():
     global _sample_negative
     global _sample
     global _sample_label
+    
 
     def __init__(self):
         self._sample_person = {}
         self._sample_negative = {}
         self._sample = []
         self._sample_label = {}
-        
         lines = open('../data/train_val.txt','r')
         for line in lines:
             personname = line.split('@')[0]

@@ -29,17 +29,27 @@ Then return to caffe root create build directory:
     
 ## Usage
 
-Change the configs in ./tripletloss/config.py, Makesure your image path is exists, (my path is exampled)
+a.Pre-training your model with softmax loss. Initialize the parameters of the CNN(layer's lr_mult,decay_mult) which you find in your caffe folder. Don't forget the 'base_lr' in solver.prototxt.
+
+b.Uncommit the lines of 'softmax' in train.prototxt and commit 'tripletloss'.
+
+c.Change the configs in ./tripletloss/config.py, Makesure your image path is exists, (my path is exampled)
 
 	python train.py
 
+d.Uncommit the lines of 'tripletloss' in train.prototxt and commit 'softmax'.
+
+e.Initialize the parameters mentioned above.
+
+	python train.py
+	
 I provide a pretrained example model training from a data set of 997 indentities. You could change the top fc9 layer's name and finetune this model.
 But the best way is to make the model to fit your own dataset smoothly. Re-training the model on your own data set.
 
 My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/1506.07310.pdf). (also similiar with the vgg_face's method)
 
-Firstly, pretraining the model with softmax, or you'll get a real long period waiting for your model to converge.
-Then use triplet method to finetune your model, makeing your model's output feature fits the expected Euclidean distance.
+Firstly, pretraining the model with softmax, Here means to fix your featrue out put to satisfy the classification model.
+Then using triplet method to train the linear transform layer fc9_1, making the feature's affine projection fits the expected Euclidean distance.
 
 notation: maybe your need a really well cropped face dataset to do this.
 
