@@ -22,7 +22,7 @@ class Norm2Layer(caffe.Layer):
 
     def setup(self, bottom, top):
         """Setup the TripletDataLayer."""
-        assert bottom[0].num % 3 == 0
+        
         top[0].reshape(bottom[0].num, shape(bottom[0].data)[1])
 
     def forward(self, bottom, top):

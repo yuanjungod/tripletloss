@@ -85,7 +85,7 @@ class TripletLayer(caffe.Layer):
                     bottom[1].diff[i] = np.zeros(shape(bottom[0].data)[1])
                     bottom[2].diff[i] = np.zeros(shape(bottom[0].data)[1])
         
-        print 'select gradient_loss:',bottom[0].diff[0][0]
+        #print 'select gradient_loss:',bottom[0].diff[0][0]
         #print shape(bottom[0].diff),shape(bottom[1].diff),shape(bottom[2].diff)
 
     def reshape(self, bottom, top):
