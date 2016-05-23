@@ -51,7 +51,7 @@ But the best way is to make the model to fit your own dataset smoothly. Re-train
 My approach is like the Baidu's [paper](https://arxiv.org/ftp/arxiv/papers/1506/1506.07310.pdf). (also similiar with the vgg_face's method)
 
 Firstly, pretraining the model with softmax, Here means to fix your featrue out put to satisfy the classification model.
-Then using triplet method to train the linear transform layer fc9_1, making the feature's affine projection fits the expected Euclidean distance.
+Then do a kind of metric learning. Using triplet method to train the linear transform layer fc9_1, making the feature's affine projection fits the expected Euclidean distance.
 
 notation: maybe your need a really well cropped face dataset to do this.
 
