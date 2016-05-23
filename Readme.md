@@ -29,6 +29,8 @@ Then return to caffe root create build directory:
     
 ## Usage
 
+(You should review the code first~)
+
 a.Pre-training your model with softmax loss. Initialize the parameters of the CNN(layer's lr_mult,decay_mult) which you find in your caffe folder. Don't forget the 'base_lr' in solver.prototxt.
 
 b.Uncommit the lines of 'softmax' in train.prototxt and commit 'tripletloss'.
