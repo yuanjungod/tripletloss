@@ -76,8 +76,8 @@ class TripletSelectLayer(caffe.Layer):
                 bottom[0].diff[self.tripletlist[i][1]] = np.zeros(shape(top[1].diff[i]))
                 bottom[0].diff[self.tripletlist[i][2]] = np.zeros(shape(top[2].diff[i]))
 
-        print 'backward-no_re:',bottom[0].diff[0][0]
-        print 'tripletlist:',self.no_residual_list
+        #print 'backward-no_re:',bottom[0].diff[0][0]
+        #print 'tripletlist:',self.no_residual_list
 
         
 

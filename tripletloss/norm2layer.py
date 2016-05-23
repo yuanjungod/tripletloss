@@ -32,7 +32,7 @@ class Norm2Layer(caffe.Layer):
         for i in range((bottom[0]).num):
             X_normalized = preprocessing.normalize(bottom[0].data[i].reshape(1,-1), norm='l2')[0]
             minibatch_db.append(X_normalized)
-        print 'bottom**:',np.dot(bottom[0].data[0],bottom[0].data[0])
+        #print 'bottom**:',np.dot(bottom[0].data[0],bottom[0].data[0])
         top[0].data[...] = minibatch_db
 
     def backward(self, top, propagate_down, bottom):
