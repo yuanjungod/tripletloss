@@ -16,7 +16,7 @@ Go to your caffe root path:
 	
 	cp Makefile.configexample Makefile.config
 	
-Open Makefile.config uncommit the line :
+Open Makefile.config uncomment the line :
 
 	WITH_PYTHON_LAYER := 1
 	
@@ -33,13 +33,13 @@ Then return to caffe root create build directory:
 
 a.Pre-training your model with softmax loss. Initialize the parameters of the CNN(layer's lr_mult,decay_mult) which you find in your caffe folder. Don't forget the 'base_lr' in solver.prototxt.
 
-b.Uncommit the lines of 'softmax' in train.prototxt and commit 'tripletloss'.
+b.Uncomment the lines of 'softmax' in train.prototxt and commit 'tripletloss'.
 
 c.Change the configs in ./tripletloss/config.py, Makesure your image path is exists, (my path is exampled)
 
 	python train.py
 
-d.Uncommit the lines of 'tripletloss' in train.prototxt and commit 'softmax'.
+d.Uncomment the lines of 'tripletloss' in train.prototxt and commit 'softmax'.
 
 e.Initialize the parameters mentioned above.
 
