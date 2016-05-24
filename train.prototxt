@@ -524,7 +524,7 @@ layer {
 #layer {
 #  name: "accuracy_1"
 #  type:  "Accuracy"
-#  bottom: "norm2"
+#  bottom: "fc9"
 #  bottom: "labels"
 #  top: "accuracy"
 #  include: { phase: TEST }
@@ -532,7 +532,7 @@ layer {
 #layer {
 #  name: "loss_cls"
 #  type: "SoftmaxWithLoss"
-#  bottom: "norm2"
+#  bottom: "fc9"
 #  bottom: "labels"
 #  top: "loss_cls"
 #  loss_weight: 1
