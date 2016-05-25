@@ -54,7 +54,7 @@ class TripletSelectLayer(caffe.Layer):
         for i in range(self.triplet): 
             top_archor.append(bottom[0].data[i])
             top_positive.append(bottom[0].data[aps[i][0]])
-                top_negative.append(bottom[0].data[ans[i][0]])
+            top_negative.append(bottom[0].data[ans[i][0]])
             if aps[i][1] >= ans[i][1]:
                self.no_residual_list.append(i)
             self.tripletlist.append([i,aps[i][0],ans[i][0]])
