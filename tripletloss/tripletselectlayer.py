@@ -56,7 +56,7 @@ class TripletSelectLayer(caffe.Layer):
             top_positive.append(bottom[0].data[aps[i][0]])
                 top_negative.append(bottom[0].data[ans[i][0]])
             if aps[i][1] >= ans[i][1]:
-            self.no_residual_list.append(i)
+               self.no_residual_list.append(i)
             self.tripletlist.append([i,aps[i][0],ans[i][0]])
 
         top[0].data[...] = np.array(top_archor).astype(float32)
