@@ -31,11 +31,11 @@ Then return to caffe root create build directory:
 
 I trained a 256 dims output model, the results for clustering is followed:
 
-![image](https://github.com/pinguo-luhaofang/tripletloss/img/10.jpg)
-![image](https://github.com/pinguo-luhaofang/tripletloss/img/11.jpg)
-![image](https://github.com/pinguo-luhaofang/tripletloss/img/12.jpg)
-![image](https://github.com/pinguo-luhaofang/tripletloss/img/13.jpg)
-![image](https://github.com/pinguo-luhaofang/tripletloss/img/14.jpg)
+![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/10.jpg)
+![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/11.jpg)
+![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/12.jpg)
+![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/13.jpg)
+![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/14.jpg)
 
 ## Usage
 
