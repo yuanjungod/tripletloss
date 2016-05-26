@@ -43,13 +43,13 @@ I trained a 256 dims output model, the results for clustering is followed:
 
 a.Pre-training your model with softmax loss. Initialize the parameters of the CNN(layer's lr_mult,decay_mult) which you find in your caffe folder. Don't forget the 'base_lr' in solver.prototxt.
 
-b.Uncomment the lines of 'softmax' in train.prototxt and commit 'tripletloss'.
+b.Uncomment the lines of 'softmax' in train.prototxt and comment 'tripletloss'.
 
 c.Change the configs in ./tripletloss/config.py, Makesure your image path is exists, (my path is exampled)
 
 	python train.py
 
-d.Uncomment the lines of 'tripletloss' in train.prototxt and commit 'softmax'.
+d.Uncomment the lines of 'tripletloss' in train.prototxt and comment 'softmax'.
 
 e.Initialize the parameters mentioned above.
 
