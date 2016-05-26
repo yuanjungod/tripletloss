@@ -26,7 +26,17 @@ Then return to caffe root create build directory:
 	cd build
 	cmake ..
 	make all & make pycaffe
-    
+
+## Cluster Sample
+
+I trained a 256 dims output model, the results for clustering is followed:
+
+<img src="http://chuantu.biz/t5/1/1464229533x1035372871.jpg">
+<img src="http://chuantu.biz/t5/1/1464229572x1035372871.jpg">
+<img src="http://chuantu.biz/t5/1/1464229603x1035372871.jpg">
+<img src="http://chuantu.biz/t5/1/1464229621x1035372871.jpg">
+<img src="http://chuantu.biz/t5/1/1464229639x1035372871.jpg">
+
 ## Usage
 
 (You should review the code first~)
