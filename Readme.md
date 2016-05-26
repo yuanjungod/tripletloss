@@ -29,7 +29,7 @@ Then return to caffe root create build directory:
 
 ## Cluster Sample
 
-I trained a 256 dims output model, the results for clustering is followed:
+I trained a 256 dim output model, the results for clustering is followed:
 
 ![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/10.jpg)
 ![image](https://github.com/pinguo-luhaofang/tripletloss/blob/master/img/11.jpg)
