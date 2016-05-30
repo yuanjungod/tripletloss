@@ -66,3 +66,10 @@ Then do a kind of metric learning. Using triplet method to train the linear tran
 notation: maybe your need a really well cropped face dataset to do this.
 
 If the proposal is helpful for you, please star it. thanks~
+
+## Annotation
+I haven't test my proposal on the lfw datasets.
+But if you want to, I'll give you my advice that how to train the model:
+a. Mixing up a dataset which is general enough with the lfw training data. Training the model with softmax on your new dataset.
+b. Finetuning the model with tripletloss on the lfw dataset.
+That should be worked.
