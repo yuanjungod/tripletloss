@@ -564,6 +564,7 @@ layer {
     }
   }
 }
+#add activation layer may increase the feature's expression
 layer {
   name: "triplet_select"
   type: "Python"
