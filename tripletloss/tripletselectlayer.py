@@ -68,13 +68,13 @@ class TripletSelectLayer(caffe.Layer):
         
         for i in range(len(self.tripletlist)):
             if not i in self.no_residual_list:
-                bottom[0].diff[self.tripletlist[i][0]] = top[0].diff[i]
-                bottom[0].diff[self.tripletlist[i][1]] = top[1].diff[i]
-                bottom[0].diff[self.tripletlist[i][2]] = top[2].diff[i]
+                bottom[0].diff[self.tripletlist[i][0]] += top[0].diff[i]
+                bottom[0].diff[self.tripletlist[i][1]] += top[1].diff[i]
+                bottom[0].diff[self.tripletlist[i][2]] += top[2].diff[i]
             else:
-                bottom[0].diff[self.tripletlist[i][0]] = np.zeros(shape(top[0].diff[i]))
-                bottom[0].diff[self.tripletlist[i][1]] = np.zeros(shape(top[1].diff[i]))
-                bottom[0].diff[self.tripletlist[i][2]] = np.zeros(shape(top[2].diff[i]))
+                bottom[0].diff[self.tripletlist[i][0]] += np.zeros(shape(top[0].diff[i]))
+                bottom[0].diff[self.tripletlist[i][1]] += np.zeros(shape(top[1].diff[i]))
+                bottom[0].diff[self.tripletlist[i][2]] += np.zeros(shape(top[2].diff[i]))
 
         #print 'backward-no_re:',bottom[0].diff[0][0]
         #print 'tripletlist:',self.no_residual_list
