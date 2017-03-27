@@ -1,5 +1,5 @@
 
-Please download the pre-trained model from [here](http://pan.baidu.com/s/1dFpxhzN). The model was trained for 100000 iterations with softmax.
+Please download the pre-trained model from [here](https://pan.baidu.com/s/1bo9eqaN). The model was trained for 100000 iterations with softmax.
 
 Finetune this model with tripletloss,or re-train the model on your own dataset.
 
